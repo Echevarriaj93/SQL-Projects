@@ -75,3 +75,20 @@ where d.continent is not null
 group by location
 order by sum(convert(v.new_vaccinations, unsigned int)) desc; -- China has rolled out the most vaccinations out of any place recorded
 
+
+-- Percentage of people vaccinated per location descending
+
+select d.location, max(d.population) as max_pop,
+max(convert(people_vaccinated, unsigned int)) as People_w_vaccs,
+sum(convert(d.new_deaths, unsigned int)) as agg_deaths,
+(max(convert(v.people_vaccinated, unsigned int))/max(convert(d.population, unsigned int)))*100 as percent_vacc
+from PortfolioProject.coviddeaths d
+join PortfolioProject.covidvaccinations v
+on 
+d.location = v.location
+and
+d.date = v.date
+where d.continent is not null
+group by location
+order by sum(convert(v.new_vaccinations, unsigned int)) desc; 
+
