@@ -90,5 +90,5 @@ and
 d.date = v.date
 where d.continent is not null
 group by location
-order by sum(convert(v.new_vaccinations, unsigned int)) desc; 
+order by sum(convert(v.new_vaccinations, unsigned int)) desc; -- 90% of China and 79% of the U.S are vaccinated with at least one dose.
 
